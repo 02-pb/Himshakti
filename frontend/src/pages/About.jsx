@@ -63,7 +63,7 @@ export default function About() {
 
             <div>
               <span>📞</span>
-              <p>+91 98765 43210</p>
+              <p>+91 8218366275</p>
             </div>
 
             <div>

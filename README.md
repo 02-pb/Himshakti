@@ -6,9 +6,13 @@ A mobile-first direct-to-consumer (D2C) landing page for HimShakti Food Processi
 
 ## Tech Stack
 
-* HTML5
-* CSS3
-* Vanilla JavaScript
+* React.js (Frontend UI Library)
+* React Router DOM (Routing & Navigation)
+* HTML5 & CSS3 (Structure & Styling)
+* JavaScript (ES6+) (Core Logic)
+* Bootstrap / Tailwind CSS (Responsive UI Design)
+* WhatsApp API (Order Checkout Integration)
+* Git & GitHub (Version Control & Deployment)
 
 ---
 

@@ -138,11 +138,11 @@ export default function Home() {
 
     <div className="info">
       <h4>📞 Contact</h4>
-      <p>+91 98765 43210</p>
+      <p>+91 8218366275</p>
     </div>
 
     <a
-      href="https://wa.me/919876543210"
+      href="https://wa.me/918218366275"
       target="_blank"
       rel="noreferrer"
       className="help-btn"
