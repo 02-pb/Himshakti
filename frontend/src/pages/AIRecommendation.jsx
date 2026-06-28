@@ -46,19 +46,36 @@ export default function AIRecommendation() {
   const [result, setResult] = useState(null);
   
 
- const handleRecommendation = () => {
-  if (!goal) {
-    alert("Please select your goal.");
-    return;
-  }
+  const handleRecommendation = async () => {
+    if (!goal) {
+      alert("Please select your goal.");
+      return;
+    }
 
-  setLoading(true);
+    setLoading(true);
+    setResult(null);
 
-  setTimeout(() => {
-    setResult(recommendations[goal]);
-    setLoading(false);
-  }, 1200);
-};
+    try {
+      const res = await fetch("http://localhost:5000/api/products/recommendations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ goal }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setResult(data.recommendation);
+      } else {
+        setResult(recommendations[goal]);
+      }
+    } catch (err) {
+      console.error("Failed to fetch recommendation, using static fallback:", err);
+      setResult(recommendations[goal]);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <>
       <Navbar />

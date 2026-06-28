@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar({ cartCount = 0 }) {
-
+  const navigate = useNavigate();
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
@@ -28,11 +28,30 @@ export default function Navbar({ cartCount = 0 }) {
     }
   };
 
+  const handleSearchClick = () => {
+    navigate("/");
+    setTimeout(() => {
+      const searchInput = document.querySelector(".search-input");
+      if (searchInput) {
+        searchInput.focus();
+        searchInput.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }, 100);
+  };
+
   return (
     <nav className="navbar">
       <h2>PahadiKart 🌿</h2>
 
       <div className="nav-links">
+        <span 
+          className="nav-search-icon" 
+          onClick={handleSearchClick} 
+          style={{ cursor: "pointer", marginRight: "2px" }}
+          aria-label="Search"
+        >
+          🔍
+        </span>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
         <Link to="/dashboard">Dashboard</Link>
