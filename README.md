@@ -2,14 +2,6 @@
 
 ## A responsive Direct-to-Consumer (D2C) web application developed for HimShakti Food Processing Unit, enabling customers to browse authentic Himalayan food products, manage a shopping cart, receive AI-based product recommendations, and place orders through WhatsApp. The project also includes a RESTful backend API for product management.
 
-### Prerequisites
-
-Before running the backend, make sure you have:
-
-- Node.js (v16 or later recommended)
-- npm (comes with Node.js)
-- Git (optional, for cloning the repository)
-
 ## Tech Stack
 
 ### Frontend
@@ -23,6 +15,16 @@ Before running the backend, make sure you have:
 
 ### Backend
 
+### Prerequisites
+
+Before running the backend, make sure you have:
+
+- Node.js (v16 or later recommended)
+- npm (comes with Node.js)
+- Git (optional, for cloning the repository)
+
+Backend Technologies and Dependencies
+
 - Node.js
 - Express.js
 - MongoDB Atlas
@@ -30,7 +32,6 @@ Before running the backend, make sure you have:
 - CORS
 - Dotenv
 - Nodemon
-
 
 ### Tools & Design
 
