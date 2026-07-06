@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -34,6 +35,7 @@ export default function Dashboard() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!name || !price || !category) {
       toast.error("Please fill in all fields");
       return;
@@ -41,28 +43,41 @@ export default function Dashboard() {
 
     try {
       if (editingId) {
-        // PUT request
-        const res = await fetch(`http://localhost:5000/api/products/${editingId}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, price: Number(price), category }),
-        });
+        const res = await fetch(
+          `http://localhost:5000/api/products/${editingId}`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name,
+              price: Number(price),
+              category,
+            }),
+          }
+        );
+
         if (!res.ok) throw new Error("Failed to update product");
+
         const result = await res.json();
         toast.success(result.message || "Product updated successfully!");
         setEditingId(null);
       } else {
-        // POST request
         const res = await fetch("http://localhost:5000/api/products", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, price: Number(price), category }),
+          body: JSON.stringify({
+            name,
+            price: Number(price),
+            category,
+          }),
         });
+
         if (!res.ok) throw new Error("Failed to add product");
+
         const result = await res.json();
         toast.success(result.message || "Product added successfully!");
       }
-      // Reset form
+
       setName("");
       setPrice("");
       setCategory("");
@@ -74,12 +89,13 @@ export default function Dashboard() {
   };
 
   const handleEdit = (product) => {
-    setEditingId(product.id);
+    setEditingId(product._id || product.id);
     setName(product.name);
     setPrice(product.price);
     setCategory(product.category);
-    // Scroll to form smoothly
+
     const formElement = document.querySelector(".dashboard-form-section");
+
     if (formElement) {
       formElement.scrollIntoView({ behavior: "smooth" });
     }
@@ -92,7 +108,9 @@ export default function Dashboard() {
       const res = await fetch(`http://localhost:5000/api/products/${id}`, {
         method: "DELETE",
       });
+
       if (!res.ok) throw new Error("Failed to delete product");
+
       const result = await res.json();
       toast.success(result.message || "Product deleted successfully!");
       fetchProducts();
@@ -118,11 +136,11 @@ export default function Dashboard() {
         <div className="dashboard-header">
           <h1>🌿 PahadiKart Product Management</h1>
           <p>
-            Create, view, update, and delete products dynamically. All updates sync directly with the backend.
+            Create, view, update, and delete products dynamically. All updates
+            sync directly with the backend.
           </p>
         </div>
 
-        {/* Stats */}
         <div className="dashboard-stats">
           <div className="stat-card">
             <h2>{products.length}</h2>
@@ -140,11 +158,10 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* CRUD Manager Grid */}
         <div className="dashboard-grid">
-          {/* Form Side */}
           <div className="dashboard-form-section">
             <h2>{editingId ? "✏️ Edit Product" : "➕ Add New Product"}</h2>
+
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="name">Product Name</label>
@@ -190,8 +207,13 @@ export default function Dashboard() {
                 <button type="submit" className="save-btn">
                   {editingId ? "Save Changes" : "Add Product"}
                 </button>
+
                 {editingId && (
-                  <button type="button" className="cancel-btn" onClick={handleCancelEdit}>
+                  <button
+                    type="button"
+                    className="cancel-btn"
+                    onClick={handleCancelEdit}
+                  >
                     Cancel
                   </button>
                 )}
@@ -199,11 +221,13 @@ export default function Dashboard() {
             </form>
           </div>
 
-          {/* List Table Side */}
           <div className="dashboard-list-section">
             <h2>📦 Product Directory</h2>
+
             {loading ? (
-              <div style={{ textAlign: "center", padding: "20px" }}>Loading products from backend...</div>
+              <div style={{ textAlign: "center", padding: "20px" }}>
+                Loading products from backend...
+              </div>
             ) : products.length > 0 ? (
               <div className="products-table-wrapper">
                 <table className="products-table">
@@ -216,13 +240,16 @@ export default function Dashboard() {
                       <th>Actions</th>
                     </tr>
                   </thead>
+
                   <tbody>
                     {products.map((p) => (
-                      <tr key={p.id}>
-                        <td>#{p.id}</td>
+                      <tr key={p._id || p.id}>
+                        <td>#{p.id || p._id?.slice(-6)}</td>
                         <td style={{ fontWeight: "600" }}>{p.name}</td>
                         <td>{p.category}</td>
-                        <td style={{ fontWeight: "700", color: "#2e7d32" }}>₹{p.price}</td>
+                        <td style={{ fontWeight: "700", color: "#2e7d32" }}>
+                          ₹{p.price}
+                        </td>
                         <td>
                           <div className="action-buttons">
                             <button
@@ -232,8 +259,9 @@ export default function Dashboard() {
                             >
                               ✏️ Edit
                             </button>
+
                             <button
-                              onClick={() => handleDelete(p.id)}
+                              onClick={() => handleDelete(p._id || p.id)}
                               className="delete-action-btn"
                               title="Delete"
                             >
@@ -247,19 +275,26 @@ export default function Dashboard() {
                 </table>
               </div>
             ) : (
-              <div style={{ textAlign: "center", padding: "30px", color: "#888" }}>
+              <div
+                style={{
+                  textAlign: "center",
+                  padding: "30px",
+                  color: "#888",
+                }}
+              >
                 No products found. Add a product to get started!
               </div>
             )}
           </div>
         </div>
 
-        {/* Support Banner */}
         <div className="dashboard-banner">
           <h2>Need Assistance?</h2>
           <p>
-            Contact our team for bulk orders, product details, or any support related to PahadiKart.
+            Contact our team for bulk orders, product details, or any support
+            related to PahadiKart.
           </p>
+
           <a
             href="https://wa.me/918218366275"
             target="_blank"
