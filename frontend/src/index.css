@@ -1421,3 +1421,133 @@ body.dark .products-table th {
 .delete-action-btn:hover {
   opacity: 0.9;
 }
+.register-section {
+  min-height: 72vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 20px;
+  background: linear-gradient(135deg, #f2f8f2, #fffaf1);
+}
+
+.register-card {
+  width: min(100%, 460px);
+  padding: 36px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 12px 35px rgba(32, 74, 42, 0.14);
+  border: 1px solid #dcebdc;
+}
+
+.register-icon {
+  display: inline-flex;
+  width: 54px;
+  height: 54px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  background: #e9f5e8;
+  font-size: 26px;
+}
+
+.register-card .login-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.register-card .login-header h2 {
+  margin: 0 0 8px;
+  color: #245b2c;
+  font-size: 28px;
+}
+
+.register-card .login-header p {
+  margin: 0;
+  color: #647067;
+  font-size: 14px;
+}
+
+.register-card .input-group {
+  margin-bottom: 17px;
+}
+
+.register-card .input-group label {
+  display: block;
+  margin-bottom: 7px;
+  color: #2d3b30;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.register-card .input-group input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  border: 1px solid #cfdccf;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+}
+
+.register-card .input-group input:focus {
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
+}
+
+.register-btn {
+  width: 100%;
+  margin-top: 6px;
+  padding: 13px;
+  border: none;
+  border-radius: 10px;
+  background: #2e7d32;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.register-btn:hover {
+  background: #236528;
+}
+
+.register-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.auth-message {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fff0f0;
+  color: #b3261e;
+  text-align: center;
+  font-size: 14px;
+}
+
+.register-card .login-footer-text {
+  margin: 22px 0 0;
+  text-align: center;
+}
+
+.register-card .login-footer-text a {
+  color: #2e7d32;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.register-card .login-footer-text a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .register-section {
+    padding: 28px 15px;
+  }
+
+  .register-card {
+    padding: 28px 20px;
+  }
+}

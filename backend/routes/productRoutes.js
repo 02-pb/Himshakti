@@ -1,3 +1,4 @@
+const requireAuth = require("../middleware/requireAuth");
 const express = require("express");
 
 const {
@@ -21,12 +22,10 @@ router.get("/", getAllProducts);
 router.get("/:id", getProductById);
 
 // Add Product
-router.post("/", addProduct);
+router.post("/", requireAuth, addProduct);
 
-// Update Product
-router.put("/:id", updateProduct);
+router.put("/:id", requireAuth, updateProduct);
 
-// Delete Product
-router.delete("/:id", deleteProduct);
+router.delete("/:id", requireAuth, deleteProduct);
 
 module.exports = router;
