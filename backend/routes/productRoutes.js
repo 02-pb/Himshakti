@@ -22,10 +22,10 @@ router.get("/", getAllProducts);
 router.get("/:id", getProductById);
 
 // Add Product
-router.post("/", requireAuth, addProduct);
+router.post("/",  addProduct);
 
-router.put("/:id", requireAuth, updateProduct);
+router.put("/:id", updateProduct);
 
-router.delete("/:id", requireAuth, deleteProduct);
+router.delete("/:id", deleteProduct);
 
 module.exports = router;

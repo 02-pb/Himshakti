@@ -3,79 +3,52 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Button, Loader } from "../components/ui";
 
-const recommendations = {
-  "Healthy Snacks": {
-    product: "Millet Cookies",
-    reason:
-      "Rich in fibre and made from healthy millets. Perfect for everyday snacking.",
-    confidence: "98%",
-  },
 
-  "Weight Loss": {
-    product: "Ragi Crackers",
-    reason:
-      "Low in calories and high in fibre, making them a great choice for weight management.",
-    confidence: "96%",
-  },
-
-  "High Protein": {
-    product: "Millet Energy Bars",
-    reason:
-      "Packed with protein and natural energy for an active lifestyle.",
-    confidence: "99%",
-  },
-
-  "Refreshing Drink": {
-    product: "Buransh Squash",
-    reason:
-      "Natural Himalayan drink that helps keep you refreshed and hydrated.",
-    confidence: "94%",
-  },
-
-  "Traditional Taste": {
-    product: "Fruit Pickle",
-    reason:
-      "Authentic homemade Himalayan pickle prepared using traditional methods.",
-    confidence: "97%",
-  },
-};
 
 export default function AIRecommendation() {
   const [goal, setGoal] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
-  
+  const [customPrompt, setCustomPrompt] = useState("");
+  const [error, setError] = useState("");
 
   const handleRecommendation = async () => {
-    if (!goal) {
-      alert("Please select your goal.");
-      return;
-    }
+  const finalPrompt = customPrompt.trim() || goal;
 
-    setLoading(true);
-    setResult(null);
+  if (!finalPrompt) {
+    alert("Please select your goal or type your requirement.");
+    return;
+  }
 
-    try {
-      const res = await fetch("http://localhost:5000/api/products/recommendations", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ goal }),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setResult(data.recommendation);
-      } else {
-        setResult(recommendations[goal]);
-      }
-    } catch (err) {
-      console.error("Failed to fetch recommendation, using static fallback:", err);
-      setResult(recommendations[goal]);
-    } finally {
-      setLoading(false);
+  setLoading(true);
+setResult(null);
+setError("");
+
+  try {
+    const res = await fetch("http://localhost:5000/api/ai/recommend", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        prompt: finalPrompt,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      setResult(data.response);
+    } else {
+      setError(data.message);
     }
-  };
+  } catch (err) {
+    console.log(err);
+    setError("Failed to get AI recommendation. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <>
       <Navbar />
@@ -91,16 +64,65 @@ export default function AIRecommendation() {
           </p>
 
           <select
-            value={goal}
-            onChange={(e) => setGoal(e.target.value)}
-          >
-            <option value="">Select your goal</option>
-            <option>Healthy Snacks</option>
-            <option>Weight Loss</option>
-            <option>High Protein</option>
-            <option>Refreshing Drink</option>
-            <option>Traditional Taste</option>
-          </select>
+  value={goal}
+  onChange={(e) => setGoal(e.target.value)}
+  style={{
+    width: "100%",
+    padding: "14px",
+    borderRadius: "10px",
+    fontSize: "17px",
+    marginBottom: "20px",
+  }}
+>
+  <option value="">Select your goal</option>
+
+  <option value="Healthy Snacks">
+    Healthy Snacks
+  </option>
+
+  <option value="Weight Loss">
+    Weight Loss
+  </option>
+
+  <option value="High Protein">
+    High Protein
+  </option>
+
+  <option value="Immunity Booster">
+    Immunity Booster
+  </option>
+
+  <option value="Refreshing Drink">
+    Refreshing Drink
+  </option>
+
+  <option value="Traditional Foods">
+    Traditional Foods
+  </option>
+</select>
+<div
+  style={{
+    textAlign: "center",
+    marginBottom: "15px",
+    color: "#777",
+    fontWeight: "bold",
+  }}
+>
+OR
+</div>
+<input
+  type="text"
+  placeholder="Type your own requirement..."
+  value={customPrompt}
+  onChange={(e) => setCustomPrompt(e.target.value)}
+  style={{
+    width: "100%",
+    padding: "14px",
+    borderRadius: "10px",
+    fontSize: "17px",
+    marginBottom: "30px",
+  }}
+/>
 
           <br />
           <br />
@@ -112,28 +134,44 @@ export default function AIRecommendation() {
   🤖 Get Recommendation
 </button>
 
-          <br />
-          <br />
+<br />
+<br />
 
-          {loading && <Loader />}
+{loading && <Loader />}
 
-          {result && !loading && (
-            <div className="recommendation-card">
-              <h2>✨ Recommended Product</h2>
+{error && (
+  <div
+    style={{
+      backgroundColor: "#ffe5e5",
+      color: "#d32f2f",
+      padding: "12px",
+      borderRadius: "8px",
+      marginTop: "15px",
+      fontWeight: "600",
+      textAlign: "center",
+    }}
+  >
+    ❌ {error}
+  </div>
+)}
 
-              <h3>{result.product}</h3>
+{result && !loading && (
+  <div className="recommendation-card">
+    <h2>🤖 AI Recommendation</h2>
 
-              <p>{result.reason}</p>
+    <pre
+      style={{
+        whiteSpace: "pre-wrap",
+        textAlign: "left",
+        lineHeight: "1.8",
+        fontSize: "16px",
+      }}
+    >
+      {result}
+    </pre>
+  </div>
+)}
 
-              <p className="confidence">
-  🎯 AI Confidence: <strong>{result.confidence}</strong>
-</p>
-
-              <Button>
-                Add to Cart
-              </Button>
-            </div>
-          )}
         </div>
       </div>
 
