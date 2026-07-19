@@ -1,6 +1,21 @@
 # PahadiKart
 
-## A responsive Direct-to-Consumer (D2C) web application developed for HimShakti Food Processing Unit, enabling customers to browse authentic Himalayan food products, manage a shopping cart, receive AI-based product recommendations, and place orders through WhatsApp. The project also includes a RESTful backend API for product management.
+## A responsive Direct-to-Consumer (D2C) web application developed for HimShakti Food Processing Unit, enabling customers to browse authentic Himalayan food products, manage a shopping cart, receive AI-powered product recommendations, and place orders through WhatsApp. The project includes a RESTful backend API with authentication and AI recommendation support.
+
+---
+
+## Features
+
+- Browse authentic Himalayan food products
+- Search products by keyword
+- Shopping cart with quantity management
+- AI-powered product recommendations
+- Loading and error handling for AI recommendations
+- Secure user authentication using JWT
+- WhatsApp order integration
+- RESTful CRUD API for product management
+
+---
 
 ## Tech Stack
 
@@ -15,6 +30,16 @@
 
 ### Backend
 
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- JWT Authentication
+- bcryptjs
+- CORS
+- Dotenv
+- Nodemon
+
 ### Prerequisites
 
 Before running the backend, make sure you have:
@@ -22,16 +47,6 @@ Before running the backend, make sure you have:
 - Node.js (v16 or later recommended)
 - npm (comes with Node.js)
 - Git (optional, for cloning the repository)
-
-Backend Technologies and Dependencies
-
-- Node.js
-- Express.js
-- MongoDB Atlas
-- Mongoose
-- CORS
-- Dotenv
-- Nodemon
 
 ### Tools & Design
 
@@ -41,6 +56,7 @@ Backend Technologies and Dependencies
 - WhatsApp API
 
 ---
+
 
 ## Database Choice
 
