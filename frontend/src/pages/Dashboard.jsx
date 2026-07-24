@@ -286,7 +286,8 @@ export default function Dashboard() {
                   color: "#888",
                 }}
               >
-                No products found. Add a product to get started!
+                No products available.
+Click "Add Product" to create your first product.
               </div>
             )}
           </div>
