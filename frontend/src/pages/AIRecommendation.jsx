@@ -163,7 +163,7 @@ OR
       style={{
         whiteSpace: "pre-wrap",
         textAlign: "left",
-        lineHeight: "1.8",
+        lineHeight: "1.7",
         fontSize: "16px",
       }}
     >
