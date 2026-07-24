@@ -34,14 +34,19 @@ export default function Dashboard() {
   }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!name || !price || !category) {
-      toast.error("Please fill in all fields");
-      return;
-    }
+  if (!name || !price || !category) {
+    toast.error("Please fill in all fields");
+    return;
+  }
 
-    try {
+  if (Number(price) <= 0) {
+    toast.error("Price must be greater than 0");
+    return;
+  }
+
+  try {
       if (editingId) {
         const res = await fetch(
           `http://localhost:5000/api/products/${editingId}`,
@@ -129,7 +134,6 @@ export default function Dashboard() {
 
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} />
       <Navbar />
 
       <div className="dashboard-page">

@@ -1,5 +1,4 @@
 import React from "react";
-
 export default function Card({
   title,
   image,
@@ -27,7 +26,15 @@ I want to order:
 
   return (
     <div className="card">
-      <img src={image} alt={title} />
+      <img
+  src={image}
+  alt={title}
+  onLoad={() => console.log("Loaded:", image)}
+  onError={(e) => {
+    console.log("Failed:", image);
+    e.target.src = "https://placehold.co/300x300?text=No+Image";
+  }}
+/>
       <h3>{title}</h3>
 
       <p className="price">₹{price}</p>

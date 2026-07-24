@@ -50,16 +50,19 @@ export default function Navbar({ cartCount = 0 }) {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
 
-    setIsLoggedIn(false);
+  setIsLoggedIn(false);
 
-    toast.success("Logged out successfully");
+  toast.success("Logged out successfully", {
+    duration: 2000,
+  });
 
+  setTimeout(() => {
     navigate("/login");
-  };
-
+  }, 2000);
+};
   return (
     <nav className="navbar">
       <h2>PahadiKart 🌿</h2>
