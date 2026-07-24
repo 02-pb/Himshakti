@@ -131,7 +131,7 @@ OR
   className="recommend-btn"
   onClick={handleRecommendation}
 >
-  🤖 Get Recommendation
+  🤖 Get AI Recommendation
 </button>
 
 <br />
