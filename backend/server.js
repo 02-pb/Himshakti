@@ -25,9 +25,15 @@ connectDB();
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://my-project-1-ten-phi.vercel.app",
+  "https://my-project-1-git-master-himshakti.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: allowedOrigins,
     credentials: true,
   })
 );
