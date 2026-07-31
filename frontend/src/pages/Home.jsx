@@ -7,6 +7,7 @@ import { Loader } from "../components/ui";
 
 
 export default function Home() {
+  const API_URL = `${import.meta.env.VITE_API_URL}/api`;
   const [allProducts, setAllProducts] = useState([]);
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const [cart, setCart] = useState({});
@@ -27,7 +28,7 @@ export default function Home() {
   useEffect(() => {
   const initFetch = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/products");
+      const res = await fetch(`${API_URL}/products`);
 
       if (!res.ok) {
         throw new Error("Backend response was not successful");
@@ -58,10 +59,8 @@ export default function Home() {
     const fetchSearch = async () => {
       try {
         const url = searchQuery.trim()
-          ? `http://localhost:5000/api/products/search?q=${encodeURIComponent(
-              searchQuery
-            )}`
-          : "http://localhost:5000/api/products";
+  ? `${API_URL}/products/search?q=${encodeURIComponent(searchQuery)}`
+  : `${API_URL}/products`;
 
         const res = await fetch(url);
 

@@ -6,6 +6,7 @@ import { Button, Loader } from "../components/ui";
 
 
 export default function AIRecommendation() {
+  const API_URL = `${import.meta.env.VITE_API_URL}/api`;
   const [goal, setGoal] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
@@ -25,7 +26,7 @@ setResult(null);
 setError("");
 
   try {
-    const res = await fetch("http://localhost:5000/api/ai/recommend", {
+   const res = await fetch(`${API_URL}/ai/recommend`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

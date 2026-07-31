@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import { loginUser } from "../services/api";
 
 export default function Login() {
+  const API_URL = `${import.meta.env.VITE_API_URL}/api`;
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ export default function Login() {
 
       localStorage.setItem("token", token);
 
-      fetch("http://localhost:5000/api/auth/profile", {
+     fetch(`${API_URL}/auth/profile`, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -136,8 +137,7 @@ export default function Login() {
               type="button"
               className="login-btn"
               onClick={() => {
-                window.location.href =
-                  "http://localhost:5000/api/auth/google";
+                window.location.href = `${API_URL}/auth/google`;
               }}
             >
               Continue with Google

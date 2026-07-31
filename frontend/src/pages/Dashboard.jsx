@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function Dashboard() {
+  const API_URL = `${import.meta.env.VITE_API_URL}/api`;
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState(null);
@@ -17,7 +17,7 @@ export default function Dashboard() {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/products");
+      const res = await fetch(`${API_URL}/products`);
       if (!res.ok) throw new Error("Failed to load products");
       const data = await res.json();
       setProducts(data);
@@ -49,7 +49,7 @@ export default function Dashboard() {
   try {
       if (editingId) {
         const res = await fetch(
-          `http://localhost:5000/api/products/${editingId}`,
+  `${API_URL}/products/${editingId}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -67,7 +67,7 @@ export default function Dashboard() {
         toast.success(result.message || "Product updated successfully!");
         setEditingId(null);
       } else {
-        const res = await fetch("http://localhost:5000/api/products", {
+        const res = await fetch(`${API_URL}/products`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -110,9 +110,9 @@ export default function Dashboard() {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/products/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(`${API_URL}/products/${id}`, {
+  method: "DELETE",
+});
 
       if (!res.ok) throw new Error("Failed to delete product");
 
