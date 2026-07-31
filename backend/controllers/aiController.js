@@ -1,5 +1,4 @@
 const { GoogleGenAI } = require("@google/genai");
-console.log("Gemini Key:", process.env.GEMINI_API_KEY);
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
   
@@ -41,7 +40,7 @@ Healthy Tip:
 `;
 
     const response = await ai.models.generateContent({
-  model: "gemini-3.5-flash",
+  model: "gemini-2.0-flash",
   contents: fullPrompt,
 });
 
