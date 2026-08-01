@@ -171,3 +171,36 @@ After the server starts successfully, the backend connects to MongoDB Atlas. The
 | PUT    | `/api/products/:id`              | Update an existing product |
 | DELETE | `/api/products/:id`              | Delete a product           |
 | GET    | `/api/products/search?q=keyword` | Search products by keyword |
+
+---
+
+# Deployment Documentation
+
+## Live Frontend URL
+
+https://my-project-1-ten-phi.vercel.app
+
+## Live Backend URL
+
+https://himshakti-backend-iqbw.onrender.com
+---
+
+## Deployment Tech Stack Summary
+
+| Layer | Technology |
+|-------|------------|
+| Frontend | React (Vite), React Router DOM, Tailwind CSS |
+| Backend | Node.js, Express.js |
+| Database | MongoDB Atlas |
+| Authentication | JWT, bcryptjs, Google OAuth |
+| AI | Google Gemini API |
+| Deployment | Vercel (Frontend), Render (Backend) |
+
+---
+
+## Known Limitations on Free Tier
+
+- **Render Free Tier** automatically spins down after approximately **15 minutes of inactivity**.
+- The **first request after the backend has been idle may take 30–60 seconds** while the server wakes up.
+- MongoDB Atlas Free Tier has storage and connection limits.
+- The AI recommendation feature depends on the available Gemini API quota. If the free quota is exceeded, AI recommendations may temporarily fail until the quota resets.
