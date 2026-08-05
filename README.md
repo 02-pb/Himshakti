@@ -161,6 +161,24 @@ After the server starts successfully, the backend connects to MongoDB Atlas. The
 
 ---
 
+# Folder Structure
+
+```text
+HIMSHAKTI/
+│── backend/
+│── frontend/
+│── screenshots/
+│   ├── home.png
+│   ├── login.png
+│   ├── dashboard.png
+│   └── ai-feature.png
+│── PROMPTS.md
+│── README.md
+│── W5_SchemaDiagram_26101026.png
+```
+
+---
+
 ## API Endpoints
 
 | Method | Endpoint                         | Description                |
@@ -176,14 +194,11 @@ After the server starts successfully, the backend connects to MongoDB Atlas. The
 
 # Deployment Documentation
 
-## Live Frontend URL
+## Live Demo
 
-https://my-project-1-ten-phi.vercel.app
+- **Frontend (Vercel):** https://my-project-1-ten-phi.vercel.app
 
-## Live Backend URL
-
-https://himshakti-backend-iqbw.onrender.com
----
+- **Backend (Render):** https://himshakti-backend-iqbw.onrender.com
 
 ## Deployment Tech Stack Summary
 
@@ -204,3 +219,92 @@ https://himshakti-backend-iqbw.onrender.com
 - The **first request after the backend has been idle may take 30–60 seconds** while the server wakes up.
 - MongoDB Atlas Free Tier has storage and connection limits.
 - The AI recommendation feature depends on the available Gemini API quota. If the free quota is exceeded, AI recommendations may temporarily fail until the quota resets.
+
+---
+
+# Authentication
+
+The application uses **JWT (JSON Web Token)** authentication for secure user login and protected routes. Passwords are securely hashed using **bcryptjs** before being stored in MongoDB. Google OAuth authentication is also integrated to allow users to sign in with their Google accounts.
+
+---
+
+# AI Recommendation Feature
+
+The application includes an AI-powered recommendation system that suggests suitable Himalayan food products based on user preferences. The feature is integrated with the backend API and uses the Google Gemini API to generate personalized product recommendations. Loading states and error handling are implemented to provide a smooth user experience.
+
+---
+
+# Environment Variables
+
+## Backend (`backend/.env`)
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+FRONTEND_URL=http://localhost:5173
+```
+
+## Frontend (`frontend/.env`)
+
+```env
+VITE_API_URL=http://localhost:5000
+```
+
+**Note:** Never commit your actual `.env` file or API keys to GitHub.
+
+---
+
+# Screenshots
+
+## Home Page
+
+![Home Page](./screenshots/home.png)
+
+---
+
+## Login Page
+
+![Login Page](./screenshots/login.png)
+
+---
+
+## Product Dashboard
+
+![Product Dashboard](./screenshots/dashboard.png)
+
+---
+
+## AI Recommendation Feature
+
+![AI Recommendation Feature](./screenshots/ai-feature.png)
+
+---
+
+# Future Scope
+
+The project can be enhanced with the following features in future versions:
+
+- Secure online payment gateway integration (Razorpay/Stripe)
+- Order history and order tracking for users
+- Product ratings and customer reviews
+- Admin dashboard with sales analytics and reports
+- Inventory and stock management system
+- Email and SMS notifications for order updates
+- Wishlist and favorite products functionality
+- Multi-language support for a wider user base
+- Personalized AI recommendations based on purchase history
+- Mobile application for Android and iOS
+
+---
+
+# Author
+
+**Priyancy Bhandari**
+
+- B.Tech Computer Science Engineering
+- Graphic Era University
+- GitHub: https://github.com/02-pb
+- LinkedIn: https://www.linkedin.com/in/pb020105/
